@@ -9,7 +9,7 @@ Hardware:
 Arduino Nano, Raspberry Pi 3, Keypad, two Leds and Resistors, Breadboard, Cables (possibly power bank)
 
 Software:
-Android App "MicroDoor" which displays the status of the door
+Android App "MicroDoor" which displays the status of the door (repository includes only MainActivity and main layout file)
 databaseDoor.py on the raspberry pi which sends data to google firestore and reads from the arduino serial output
 keypad.ino on the Arduino to process the keypad input and send appropriate data to the Raspberry Pi
 
