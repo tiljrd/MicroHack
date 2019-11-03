@@ -1,0 +1,154 @@
+<canvas float:left id="canvas" width="600" height="600"></canvas>
+
+<img style=position:absolute;top:50;right:200;width:400;height:480; src="logo-with-stag-new.png" alt="Logo">
+
+<span float:left id="Retry"></span>
+<p id="Game_Over" style=font-size:40px;></p>
+
+<script src="snakecore.js"></script>
+
+<script>
+
+	class Snake {
+		constructor() {
+			this.direction = "";
+			this.positions = [];
+			this.eaten=false;
+			this.directionChanged=false;
+			this.generateHead();
+			this.generateBody();
+			while (this.positions[2].x < 3 || this.positions[2].x > 27 || this.positions[2].y < 3 || this.positions[2].y > 27) {
+				this.generateBody();
+			}
+		}
+		
+		generateHead() {
+			var randX = Math.floor(Math.random() * (maxx-6) + 3);
+			var randY = Math.floor(Math.random() * (maxy-6) + 3);
+			this.positions[0] = {x:randX, y:randY}
+		}
+		
+		generateBody() {
+			var directions = ["left", "right", "up", "down"];
+			var randD = Math.floor(Math.random() * 4);
+			this.direction = directions[randD];
+			switch(this.direction) {
+				case "left":
+					this.positions[1] = {x:this.positions[0].x+1, y:this.positions[0].y};
+					this.positions[2] = {x:this.positions[0].x+2, y:this.positions[0].y};
+					break;
+				case "right":
+					this.positions[1] = {x:this.positions[0].x-1, y:this.positions[0].y};
+					this.positions[2] = {x:this.positions[0].x-2, y:this.positions[0].y};
+					break;
+				case "up":
+					this.positions[1] = {x:this.positions[0].x, y:this.positions[0].y-1};
+					this.positions[2] = {x:this.positions[0].x, y:this.positions[0].y-2};
+					break;
+				case "down":
+					this.positions[1] = {x:this.positions[0].x, y:this.positions[0].y+1};
+					this.positions[2] = {x:this.positions[0].x, y:this.positions[0].y+2};
+					break;
+			}
+		}
+		
+		getPositions() {
+			return this.positions;
+		}
+		
+		getDirection() {
+			return this.direction;
+		}
+		
+		changeDirection(direction) {
+			if (this.directionChanged==false) {
+				this.direction = direction;
+				this.directionChanged = true;
+			}
+		}
+		
+		setChangedDirection() {
+			this.directionChanged = false;
+		}
+		
+		eat(){
+			this.eaten=true;
+		}
+		
+		update_snake() {
+			var nx = this.positions[0].x;
+			var ny = this.positions[0].y;
+			
+			if(this.direction == "right") nx++;
+			else if(this.direction == "left") nx--;
+			else if(this.direction == "up") ny--;
+			else if(this.direction == "down") ny++;
+
+			var newhead = {x: nx, y: ny};
+			this.positions.unshift(newhead);
+			if (this.eaten==false){
+				this.positions.pop();
+			}
+			else {
+				this.eaten=false;
+			}
+		}
+		
+		check_collision() {
+			for (var i=3; i<this.positions.length; i++) {
+				if ((this.positions[i].x==this.positions[0].x) && (this.positions[i].y==this.positions[0].y)){
+					return true;
+				}
+			}
+			if (this.positions[0].x<0 || this.positions[0].x>29 ||this.positions[0].y<0 || this.positions[0].y>29) {
+				return true
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	function keystroke(evt, snake, player)
+	{
+	    if (player==2){
+	        if (evt.keyCode==65 && (!(snake.getDirection() == "right"))) {
+			    snake.changeDirection("left");
+		    }
+		    if (evt.keyCode==87 && (!(snake.getDirection() == "down"))) {
+			    snake.changeDirection("up");
+		    }
+		    if (evt.keyCode==68 && (!(snake.getDirection() == "left"))) {
+			    snake.changeDirection("right");
+		    }
+		    if (evt.keyCode==83 && (!(snake.getDirection() == "up"))) {
+			    snake.changeDirection("down");
+		    }
+	    }
+	    else {
+		    if (evt.keyCode==37 && (!(snake.getDirection() == "right"))) {
+			    snake.changeDirection("left");
+		    }
+		    if (evt.keyCode==38 && (!(snake.getDirection() == "down"))) {
+			    snake.changeDirection("up");
+		    }
+		    if (evt.keyCode==39 && (!(snake.getDirection() == "left"))) {
+			    snake.changeDirection("right");
+		    }
+		    if (evt.keyCode==40 && (!(snake.getDirection() == "up"))) {
+			    snake.changeDirection("down");
+		    }
+	    }
+	}
+	
+	function create_food()
+	{
+		var randX = Math.floor(Math.random() * maxx);
+		var randY = Math.floor(Math.random() * maxy);
+		food = {
+			x: randX,
+			y: randY,
+		};
+	}
+
+</script>
