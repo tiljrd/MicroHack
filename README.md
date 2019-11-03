@@ -1,7 +1,9 @@
 # MicroHack
 MicroHack 02/11/2019
 
-This repository includes two projects created at the Microhack at the University of Southampton: A Door lock system and an online snake game.
+This repository includes two projects created at the Microhack at the University of Southampton: A Door lock system and an online snake game. The first place was achieved.
+
+The team members were: Bogdan Furtuna, Robin Jones, Radu Popescu, Timothy Stevens, Til Jordan
 
 # Door system:
 
