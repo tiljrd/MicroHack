@@ -6,7 +6,7 @@ This repository includes as project created at the Microhack at the University o
 Door system:
 
 Hardware:
-Arduino Nano, Raspberry Pi 3, Keypad, two Leds and Resistors, Breadboard, Cables (possibly power bank)
+Arduino Nano, Raspberry Pi 3, Keypad, two Leds and Resistors, Breadboard, Cables, possibly power bank
 
 Software:
 Android App "MicroDoor" which displays the status of the door (repository includes only MainActivity and main layout file)
